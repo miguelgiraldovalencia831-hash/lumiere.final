@@ -1,0 +1,38 @@
+package com.lumiere.beauty.controller;
+
+import com.lumiere.beauty.entity.Favorito;
+import com.lumiere.beauty.service.FavoritoService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/favoritos")
+@CrossOrigin(origins = "*")
+public class FavoritoController {
+
+    private final FavoritoService favoritoService;
+
+    public FavoritoController(FavoritoService favoritoService) {
+        this.favoritoService = favoritoService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Favorito> agregarFavorito(@RequestBody Favorito favorito) {
+        Favorito guardado = favoritoService.agregarFavorito(favorito);
+        return ResponseEntity.ok(guardado);
+    }
+
+    @GetMapping("/usuario/{usuarioId}")
+    public List<Favorito> listarFavoritos(@PathVariable Long usuarioId) {
+        return favoritoService.listarFavoritosDeUsuario(usuarioId);
+    }
+
+    @DeleteMapping("/usuario/{usuarioId}/empresa/{empresaId}")
+    public ResponseEntity<Void> eliminarFavorito(@PathVariable Long usuarioId, 
+                                                 @PathVariable Long empresaId) {
+        favoritoService.eliminarFavorito(usuarioId, empresaId);
+        return ResponseEntity.noContent().build();
+    }
+}

@@ -1,0 +1,21 @@
+package com.lumiere.beauty.service;
+
+import com.lumiere.beauty.entity.Empresa;
+import com.lumiere.beauty.repository.EmpresaRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class EmpresaService {
+
+    private final EmpresaRepository empresaRepository;
+
+    public EmpresaService(EmpresaRepository empresaRepository) {
+        this.empresaRepository = empresaRepository;
+    }
+
+    public List<Empresa> listarEmpresas() {
+        return empresaRepository.findAll();
+    }
+}

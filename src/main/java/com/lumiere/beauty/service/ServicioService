@@ -1,0 +1,33 @@
+package com.lumiere.beauty.service;
+
+import com.lumiere.beauty.entity.Servicio;
+import com.lumiere.beauty.repository.ServicioRepository;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ServicioService {
+
+    private final ServicioRepository servicioRepository;
+
+    public ServicioService(ServicioRepository servicioRepository) {
+        this.servicioRepository = servicioRepository;
+    }
+
+    public Servicio guardarServicio(Servicio servicio) {
+        return servicioRepository.save(servicio);
+    }
+
+    public List<Servicio> listarPorEmpresa(Long empresaId) {
+        return servicioRepository.findByEmpresaIdAndActivoTrue(empresaId);
+    }
+
+    public List<Servicio> listarPorCategoria(String categoria) {
+        return servicioRepository.findByCategoriaAndActivoTrue(categoria);
+    }
+
+    public Optional<Servicio> buscarPorId(Long id) {
+        return servicioRepository.findById(id);
+    }
+}

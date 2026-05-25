@@ -1,0 +1,32 @@
+package com.lumiere.beauty.entity;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Empresa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+
+    private String descripcion;
+
+    private String direccion;
+
+    public Empresa() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+}

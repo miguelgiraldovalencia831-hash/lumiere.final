@@ -1,0 +1,34 @@
+package com.lumiere.beauty.service;
+
+import com.lumiere.beauty.entity.Cita;
+import com.lumiere.beauty.entity.EstadoCita;
+import com.lumiere.beauty.repository.CitaRepository;
+import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Service
+public class CitaService {
+
+    private final CitaRepository citaRepository;
+
+    public CitaService(CitaRepository citaRepository) {
+        this.citaRepository = citaRepository;
+    }
+
+    public Cita guardarCita(Cita cita) {
+        return citaRepository.save(cita);
+    }
+
+    public List<Cita> listarCitasDeCliente(Long clienteId) {
+        return citaRepository.findByClienteId(clienteId);
+    }
+
+    public List<Cita> listarCitasDeEmpresa(Long empresaId) {
+        return citaRepository.findByEmpresaId(empresaId);
+    }
+
+    public List<Cita> listarCitasPendientesDeEmpresa(Long empresaId) {
+        return citaRepository.findByEmpresaIdAndEstado(empresaId, EstadoCita.PENDIENTE);
+    }
+}

@@ -1,0 +1,28 @@
+package com.lumiere.beauty.service;
+
+import com.lumiere.beauty.entity.Favorito;
+import com.lumiere.beauty.repository.FavoritoRepository;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
+@Service
+public class FavoritoService {
+
+    private final FavoritoRepository favoritoRepository;
+
+    public FavoritoService(FavoritoRepository favoritoRepository) {
+        this.favoritoRepository = favoritoRepository;
+    }
+
+    public Favorito agregarFavorito(Favorito favorito) {
+        return favoritoRepository.save(favorito);
+    }
+
+    public List<Favorito> listarFavoritosDeUsuario(Long usuarioId) {
+        return favoritoRepository.findByUsuarioId(usuarioId);
+    }
+
+    public void eliminarFavorito(Long usuarioId, Long empresaId) {
+        favoritoRepository.deleteByUsuarioIdAndEmpresaId(usuarioId, empresaId);
+    }
+}

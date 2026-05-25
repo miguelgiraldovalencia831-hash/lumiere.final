@@ -1,0 +1,41 @@
+package com.lumiere.beauty.controller;
+
+import com.lumiere.beauty.entity.Cita;
+import com.lumiere.beauty.service.CitaService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/citas")
+@CrossOrigin(origins = "*")
+public class CitaController {
+
+    private final CitaService citaService;
+
+    public CitaController(CitaService citaService) {
+        this.citaService = citaService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Cita> agendarCita(@RequestBody Cita cita) {
+        Cita guardada = citaService.guardarCita(cita);
+        return ResponseEntity.ok(guardada);
+    }
+
+    @GetMapping("/cliente/{clienteId}")
+    public List<Cita> listarCitasCliente(@PathVariable Long clienteId) {
+        return citaService.listarCitasDeCliente(clienteId);
+    }
+
+    @GetMapping("/empresa/{empresaId}")
+    public List<Cita> listarCitasEmpresa(@PathVariable Long empresaId) {
+        return citaService.listarCitasDeEmpresa(empresaId);
+    }
+
+    @GetMapping("/empresa/{empresaId}/pendientes")
+    public List<Cita> listarCitasPendientes(@PathVariable Long empresaId) {
+        return citaService.listarCitasPendientesDeEmpresa(empresaId);
+    }
+}

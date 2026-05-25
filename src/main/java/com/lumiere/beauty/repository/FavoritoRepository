@@ -1,0 +1,10 @@
+package com.lumiere.beauty.repository;
+
+import com.lumiere.beauty.entity.Favorito;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface FavoritoRepository
+        extends JpaRepository<Favorito, Long> {
+}
