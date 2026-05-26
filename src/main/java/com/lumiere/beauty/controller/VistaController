@@ -8,13 +8,11 @@ public class VistaController {
 
     @GetMapping("/")
     public String inicio() {
-        return "index";
+        return "index"; // Esto busca index.html en templates
     }
 
     @GetMapping("/empresas")
     public String empresas() {
-
-        return "empresas";
+        return "empresas"; // Esto busca empresas.html en templates
     }
-
 }
