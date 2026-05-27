@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"><title>Lumiere - Inicio</title>
+    <meta charset="UTF-8"><title>Lumiere - Bienvenid@</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-slate-50 min-h-screen flex items-center justify-center font-sans">
-    <div class="text-center">
+<body class="bg-slate-50 font-[Inter] min-h-screen flex items-center justify-center">
+    <div class="max-w-4xl w-full px-6 text-center">
         <img th:src="@{/images/logo.png}" class="h-24 mx-auto mb-6">
-        <h1 class="text-5xl font-black italic mb-10">LUMIERE</h1>
-        <div class="grid md:grid-cols-2 gap-6">
-            <a th:href="@{/empresas}" class="bg-white p-10 rounded-[2rem] shadow-xl border hover:border-pink-500 transition-all">
-                <div class="text-4xl mb-4">💼</div>
-                <h2 class="text-xl font-bold">Emprendedor</h2>
+        <h1 class="text-6xl font-black italic text-slate-900 mb-12 tracking-tighter">LUMIERE</h1>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- ROL EMPRENDEDOR -->
+            <a th:href="@{/empresas}" class="bg-white p-12 rounded-[3rem] shadow-xl border-2 border-transparent hover:border-pink-500 transition-all group">
+                <div class="text-5xl mb-6 group-hover:scale-110 transition-transform">💼</div>
+                <h2 class="text-2xl font-bold text-slate-800">Soy Emprendedor</h2>
+                <p class="text-slate-400 mt-2">Gestiona tu negocio y servicios.</p>
             </a>
-            <div class="bg-white/50 p-10 rounded-[2rem] border border-dashed text-slate-400">
-                <div class="text-4xl mb-4">✨</div>
-                <h2 class="text-xl font-bold">Cliente (Próximamente)</h2>
-            </div>
+
+            <!-- ROL CLIENTE (ACTUALIZADO) -->
+            <a th:href="@{/explorar}" class="bg-white p-12 rounded-[3rem] shadow-xl border-2 border-transparent hover:border-blue-500 transition-all group">
+                <div class="text-5xl mb-6 group-hover:scale-110 transition-transform">✨</div>
+                <h2 class="text-2xl font-bold text-slate-800">Soy Cliente</h2>
+                <p class="text-slate-400 mt-2">Encuentra y agenda tu próximo estilo.</p>
+            </a>
         </div>
     </div>
 </body>
