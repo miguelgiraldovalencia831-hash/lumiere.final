@@ -1,17 +1,12 @@
 package com.lumiere.beauty.entity;
-
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "servicio")
 public class Servicio {
-    // ... el resto del código que te pasé antes
-}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nombre;
     private Double precio;
 
@@ -20,8 +15,6 @@ public class Servicio {
     private Empresa empresa;
 
     public Servicio() {}
-
-    // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getNombre() { return nombre; }

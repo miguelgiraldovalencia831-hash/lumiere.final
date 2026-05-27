@@ -1,12 +1,7 @@
 package com.lumiere.beauty.repository;
-
 import com.lumiere.beauty.entity.Servicio;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import java.util.List;
-
-@Repository
 public interface ServicioRepository extends JpaRepository<Servicio, Long> {
-    // Busca servicios por el ID de la empresa
     List<Servicio> findByEmpresaId(Long empresaId);
 }
