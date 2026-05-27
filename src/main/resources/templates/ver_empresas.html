@@ -1,45 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8">
-    <title>Lumiere - Lista de Empresas</title>
-    <!-- Bootstrap para que se vea profesional -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Lumiere - Mis Negocios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="container mt-5">
-
-    <div class="card shadow">
-        <div class="card-header bg-dark text-white">
-            <h2 class="mb-0">Empresas Registradas</h2>
+<body class="bg-slate-50 font-[Inter]">
+    <nav class="bg-white/80 backdrop-blur-md border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img th:src="@{/images/logo.png}" class="h-10">
+                <span class="text-2xl font-black text-slate-900 tracking-tighter">LUMIERE</span>
+            </div>
+            <a th:href="@{/empresas/nuevo}" class="bg-pink-600 text-white px-6 py-3 rounded-2xl font-bold hover:bg-pink-700 shadow-lg shadow-pink-200 transition-all">
+                + Crear Negocio
+            </a>
         </div>
-        <div class="card-body">
-            <table class="table table-striped table-hover">
-                <thead class="table-secondary">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Dirección</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 'lista' debe coincidir con el nombre en el Controller -->
-                    <tr th:each="empresa : ${lista}">
-                        <td th:text="${empresa.id}"></td>
-                        <td th:text="${empresa.nombre}"></td>
-                        <td th:text="${empresa.descripcion}"></td>
-                        <td th:text="${empresa.direccion}"></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <div th:if="${#lists.isEmpty(lista)}" class="alert alert-warning">
-                No hay empresas en la base de datos.
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="mb-12">
+            <h1 class="text-4xl font-bold text-slate-900">Mis Emprendimientos</h1>
+            <p class="text-slate-500 mt-2 text-lg">Administra tus marcas y servicios activos.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div th:each="empresa : ${lista}" class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-14 h-14 bg-pink-50 text-pink-500 rounded-2xl flex items-center justify-center group-hover:bg-pink-500 group-hover:text-white transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 11-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-800 mb-2" th:text="${empresa.nombre}">Nombre</h3>
+                <p class="text-slate-500 mb-6 line-clamp-2" th:text="${empresa.descripcion}">Descripción</p>
+                <div class="flex items-center text-slate-400 text-sm mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    </svg>
+                    <span th:text="${empresa.direccion}">Ubicación</span>
+                </div>
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-slate-900 text-white py-4 rounded-2xl font-bold hover:bg-slate-800 transition-all">Gestionar</button>
+                    <button class="p-4 bg-slate-100 rounded-2xl text-slate-400 hover:text-pink-600 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-
+        
+        <div th:if="${#lists.isEmpty(lista)}" class="text-center py-24 bg-white rounded-[3rem] border-2 border-dashed border-slate-200">
+            <p class="text-slate-400 text-xl font-light italic">Aún no has registrado ningún negocio.</p>
+        </div>
+    </main>
 </body>
 </html>
        

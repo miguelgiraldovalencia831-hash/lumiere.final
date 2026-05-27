@@ -3,7 +3,7 @@ package com.lumiere.beauty.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "empresa") // Coincide con tu tabla en XAMPP
+@Table(name = "empresa")
 public class Empresa {
 
     @Id
@@ -14,10 +14,10 @@ public class Empresa {
     private String descripcion;
     private String direccion;
 
-    // --- CONSTRUCTOR VACÍO (Obligatorio para JPA) ---
+    // Constructor vacío obligatorio
     public Empresa() {}
 
-    // --- GETTERS Y SETTERS (Si estos no están, la página sale en blanco) ---
+    // Getters y Setters completos
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

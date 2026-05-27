@@ -1,36 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8"><title>Lumiere - Inicio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Lumiere</title>
-
-    <style>
-
-        body{
-            font-family: Arial;
-            text-align:center;
-            padding-top:100px;
-            background:#fff0f8;
-        }
-
-        .boton{
-            background:#d946ef;
-            color:white;
-            padding:15px 25px;
-            border-radius:10px;
-            text-decoration:none;
-        }
-
-    </style>
-
 </head>
-<body>
-
-<h1>Bienvenido a Lumiere 💅</h1>
-
-<a href="/empresas" class="boton">
-    Ver Empresas
-</a>
-
+<body class="bg-slate-50 min-h-screen flex items-center justify-center font-sans">
+    <div class="text-center">
+        <img th:src="@{/images/logo.png}" class="h-24 mx-auto mb-6">
+        <h1 class="text-5xl font-black italic mb-10">LUMIERE</h1>
+        <div class="grid md:grid-cols-2 gap-6">
+            <a th:href="@{/empresas}" class="bg-white p-10 rounded-[2rem] shadow-xl border hover:border-pink-500 transition-all">
+                <div class="text-4xl mb-4">💼</div>
+                <h2 class="text-xl font-bold">Emprendedor</h2>
+            </a>
+            <div class="bg-white/50 p-10 rounded-[2rem] border border-dashed text-slate-400">
+                <div class="text-4xl mb-4">✨</div>
+                <h2 class="text-xl font-bold">Cliente (Próximamente)</h2>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
