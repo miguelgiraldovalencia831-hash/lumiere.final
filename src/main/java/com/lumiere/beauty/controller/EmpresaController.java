@@ -14,9 +14,13 @@ import java.util.List;
 @Controller
 public class EmpresaController {
 
-    @Autowired private EmpresaRepository empresaRepository;
-    @Autowired private ServicioRepository servicioRepository;
+    @Autowired
+    private EmpresaRepository empresaRepository;
 
+    @Autowired
+    private ServicioRepository ServicioRepository;
+
+    // --- PÁGINAS GENERALES ---
     @GetMapping("/")
     public String index() { return "index"; }
 
@@ -31,12 +35,13 @@ public class EmpresaController {
         Empresa emp = empresaRepository.findById(id).orElse(null);
         if (emp != null) {
             model.addAttribute("empresa", emp);
-            model.addAttribute("servicios", servicioRepository.findByEmpresaId(id));
+            model.addAttribute("servicios", ServicioRepository.findByEmpresaId(id));
             return "cliente_perfil";
         }
         return "redirect:/explorar";
     }
 
+    // --- GESTIÓN DE EMPRENDEDOR ---
     @GetMapping("/empresas")
     public String verEmpresas(Model model) {
         model.addAttribute("lista", empresaRepository.findAll());
@@ -66,7 +71,7 @@ public class EmpresaController {
         Empresa emp = empresaRepository.findById(id).orElse(null);
         if (emp != null) {
             model.addAttribute("empresa", emp);
-            model.addAttribute("servicios", servicioRepository.findByEmpresaId(id));
+            model.addAttribute("servicios", ServicioRepository.findByEmpresaId(id));
             model.addAttribute("nuevoServicio", new Servicio());
             return "empresa_dashboard";
         }
@@ -78,7 +83,7 @@ public class EmpresaController {
         Empresa emp = empresaRepository.findById(empresaId).orElse(null);
         if (emp != null) {
             servicio.setEmpresa(emp);
-            servicioRepository.save(servicio);
+            ServicioRepository.save(servicio);
         }
         return "redirect:/empresas/gestionar/" + empresaId;
     }
