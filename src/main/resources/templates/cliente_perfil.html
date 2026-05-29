@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"><title>Lumiere - Perfil</title>
+    <meta charset="UTF-8"><title>Lumiere - Portafolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50">
-    <div class="max-w-4xl mx-auto py-12 px-6">
+<body class="bg-slate-50 p-8">
+    <div class="max-w-4xl mx-auto">
         <a th:href="@{/explorar}" class="text-slate-400 font-bold mb-8 inline-block hover:text-pink-600">← Volver al catálogo</a>
         
-        <header class="bg-white rounded-[3rem] p-10 shadow-xl mb-8 flex items-center space-x-8 border border-white">
-            <div class="w-24 h-24 bg-pink-600 text-white rounded-[2rem] flex items-center justify-center text-4xl font-black italic">L</div>
+        <header class="bg-white rounded-[3rem] p-10 shadow-xl mb-10 flex items-center space-x-8 border border-white">
+            <div class="w-24 h-24 bg-pink-600 text-white rounded-[2.5rem] flex items-center justify-center text-4xl font-black italic">L</div>
             <div>
-                <h1 class="text-5xl font-black text-slate-900 mb-2" th:text="${empresa.nombre}"></h1>
-                <p class="text-slate-500 text-lg" th:text="${empresa.direccion}"></p>
+                <h1 class="text-5xl font-black text-slate-900 mb-2 uppercase tracking-tighter" th:text="${empresa.nombre}"></h1>
+                <p class="text-slate-400 font-bold" th:text="${empresa.direccion}"></p>
             </div>
         </header>
 
-        <div class="bg-white rounded-[3rem] p-10 shadow-xl border border-white">
-            <h2 class="text-2xl font-bold mb-8 text-slate-800 italic">NUESTROS SERVICIOS</h2>
-            
-            <div class="space-y-4">
-                <div th:each="s : ${servicios}" class="flex justify-between items-center p-6 bg-slate-50 rounded-3xl hover:bg-pink-50 transition-colors group">
-                    <div>
-                        <h4 class="text-xl font-bold text-slate-800" th:text="${s.nombre}"></h4>
-                        <span class="text-pink-600 font-black text-lg" th:text="'$' + ${s.precio}"></span>
-                    </div>
-                    <button class="bg-slate-900 text-white px-8 py-3 rounded-2xl font-bold hover:bg-pink-600 transition-all">Agendar</button>
+        <h2 class="text-2xl font-black text-slate-800 mb-8 italic uppercase tracking-widest">Nuestros Servicios</h2>
+        
+        <div class="grid gap-6">
+            <!-- AQUÍ SE GENERAN LOS SERVICIOS Y EL BOTÓN AGENDAR -->
+            <div th:each="s : ${servicios}" class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-white flex justify-between items-center hover:shadow-2xl transition-all group">
+                <div>
+                    <h4 class="text-2xl font-bold text-slate-800" th:text="${s.nombre}"></h4>
+                    <p class="text-pink-600 font-black text-2xl tracking-tighter" th:text="'$' + ${s.precio}"></p>
                 </div>
+                
+                <!-- ENLACE PARA RESERVAR -->
+                <a th:href="@{'/reservar/' + ${empresa.id} + '/' + ${s.id}}" 
+                   class="bg-slate-900 text-white px-10 py-4 rounded-2xl font-bold hover:bg-pink-600 transition-all shadow-lg">
+                   Agendar Cita
+                </a>
+            </div>
 
-                <div th:if="${#lists.isEmpty(servicios)}" class="text-center py-12 text-slate-400 italic">
-                    Esta empresa aún no ha publicado servicios.
-                </div>
+            <!-- Si no hay servicios cargados en XAMPP sale esto -->
+            <div th:if="${#lists.isEmpty(servicios)}" class="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-slate-200">
+                <p class="text-slate-400 text-xl italic">Esta empresa aún no ha publicado servicios.</p>
             </div>
         </div>
     </div>

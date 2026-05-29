@@ -1,62 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Lumiere - Mis Negocios</title>
+    <meta charset="UTF-8"><title>Panel Emprendedor - Lumière</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFFCF9; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+    </style>
 </head>
-<body class="bg-slate-50 font-[Inter]">
-    <nav class="bg-white/80 backdrop-blur-md border-b sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <img th:src="@{/images/logo.png}" class="h-10">
-                <span class="text-2xl font-black text-slate-900 tracking-tighter">LUMIERE</span>
+<body class="p-10">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center py-20 mb-12">
+            <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-purple-100 text-[#6E3B9C] text-[10px] font-bold uppercase tracking-widest mb-6 bg-white shadow-sm">
+                ✨ Crece con Lumière
+            </span>
+            <h1 class="text-7xl font-serif text-[#4A235A] mb-4 leading-tight">Tu negocio merece <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-400">brillar.</span></h1>
+            <p class="text-gray-500 text-lg mb-10 max-w-2xl mx-auto leading-relaxed italic">Administra tu marca y recibe reservas automáticas.</p>
+            
+            <div class="flex justify-center space-x-4">
+                <a th:href="@{/empresas/nuevo}" class="bg-[#6E3B9C] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:shadow-purple-100 transition-all">+ Publicar mi negocio</a>
+                <a th:href="@{/}" class="bg-white text-gray-700 border border-gray-100 px-10 py-4 rounded-full font-bold shadow-sm">Volver al inicio</a>
             </div>
-            <a th:href="@{/empresas/nuevo}" class="bg-pink-600 text-white px-6 py-3 rounded-2xl font-bold hover:bg-pink-700 shadow-lg shadow-pink-200 transition-all">
-                + Crear Negocio
-            </a>
-        </div>
-    </nav>
-
-    <main class="max-w-7xl mx-auto px-6 py-12">
-        <div class="mb-12">
-            <h1 class="text-4xl font-bold text-slate-900">Mis Emprendimientos</h1>
-            <p class="text-slate-500 mt-2 text-lg">Administra tus marcas y servicios activos.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div th:each="empresa : ${lista}" class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
-                <div class="flex justify-between items-start mb-6">
-                    <div class="w-14 h-14 bg-pink-50 text-pink-500 rounded-2xl flex items-center justify-center group-hover:bg-pink-500 group-hover:text-white transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 11-8 0v4M5 9h14l1 12H4L5 9z" />
-                        </svg>
+        <!-- Lista de Negocios -->
+        <h2 class="text-xs font-black text-gray-300 uppercase tracking-[0.5em] mb-10 text-center">Mis empresas activas</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div th:each="emp : ${lista}" class="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-50 flex items-center justify-between hover:shadow-xl transition-all">
+                <div class="flex items-center space-x-6">
+                    <div class="w-16 h-16 bg-[#F3EBF7] rounded-[1.5rem] flex items-center justify-center text-2xl font-black text-[#6E3B9C] italic">L</div>
+                    <div>
+                        <h3 class="text-2xl font-serif text-[#4A235A]" th:text="${emp.nombre}"></h3>
+                        <p class="text-gray-400 text-sm" th:text="${emp.direccion}"></p>
                     </div>
                 </div>
-                <h3 class="text-2xl font-bold text-slate-800 mb-2" th:text="${empresa.nombre}">Nombre</h3>
-                <p class="text-slate-500 mb-6 line-clamp-2" th:text="${empresa.descripcion}">Descripción</p>
-                <div class="flex items-center text-slate-400 text-sm mb-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    </svg>
-                    <span th:text="${empresa.direccion}">Ubicación</span>
-                </div>
-                <div class="flex space-x-3">
-                    <button class="flex-1 bg-slate-900 text-white py-4 rounded-2xl font-bold hover:bg-slate-800 transition-all">Gestionar</button>
-                    <button class="p-4 bg-slate-100 rounded-2xl text-slate-400 hover:text-pink-600 transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                        </svg>
-                    </button>
-                </div>
+                <a th:href="@{'/empresas/gestionar/' + ${emp.id}}" class="bg-slate-900 text-white px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#6E3B9C] transition-all">Gestionar</a>
             </div>
         </div>
-        
-        <div th:if="${#lists.isEmpty(lista)}" class="text-center py-24 bg-white rounded-[3rem] border-2 border-dashed border-slate-200">
-            <p class="text-slate-400 text-xl font-light italic">Aún no has registrado ningún negocio.</p>
-        </div>
-    </main>
+    </div>
 </body>
 </html>
-       

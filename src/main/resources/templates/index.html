@@ -1,30 +1,153 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"><title>Lumiere - Bienvenid@</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière - Illuminate Your Beauty Business</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body class="bg-slate-50 font-[Inter] min-h-screen flex items-center justify-center">
-    <div class="max-w-4xl w-full px-6 text-center">
-        <img th:src="@{/images/logo.png}" class="h-24 mx-auto mb-6">
-        <h1 class="text-6xl font-black italic text-slate-900 mb-12 tracking-tighter">LUMIERE</h1>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFFCF9; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .bg-gradient-soft { background: linear-gradient(135deg, #9b87f5 0%, #d946ef 100%); }
         
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- ROL EMPRENDEDOR -->
-            <a th:href="@{/empresas}" class="bg-white p-12 rounded-[3rem] shadow-xl border-2 border-transparent hover:border-pink-500 transition-all group">
-                <div class="text-5xl mb-6 group-hover:scale-110 transition-transform">💼</div>
-                <h2 class="text-2xl font-bold text-slate-800">Soy Emprendedor</h2>
-                <p class="text-slate-400 mt-2">Gestiona tu negocio y servicios.</p>
-            </a>
+        /* Suavizado para las flores */
+        .flower-frame {
+            pointer-events: none; /* Para que no interfieran con los clics en botones */
+            z-index: 10;
+            opacity: 0.25;
+            width: 350px;
+        }
+    </style>
+</head>
+<body class="relative">
 
-            <!-- ROL CLIENTE (ACTUALIZADO) -->
-            <a th:href="@{/explorar}" class="bg-white p-12 rounded-[3rem] shadow-xl border-2 border-transparent hover:border-blue-500 transition-all group">
-                <div class="text-5xl mb-6 group-hover:scale-110 transition-transform">✨</div>
-                <h2 class="text-2xl font-bold text-slate-800">Soy Cliente</h2>
-                <p class="text-slate-400 mt-2">Encuentra y agenda tu próximo estilo.</p>
-            </a>
-        </div>
+    <!-- FLORES FIJAS A LOS LADOS (Se mantienen visibles al bajar) -->
+    <div class="fixed left-0 top-0 flower-frame h-screen flex items-start">
+        <img src="https://www.transparentpng.com/download/floral/flower-pink-floral-design-png-11.png" class="w-full mt-20">
     </div>
+    <div class="fixed right-0 top-0 flower-frame h-screen flex items-start rotate-180">
+        <img src="https://www.transparentpng.com/download/floral/flower-pink-floral-design-png-11.png" class="w-full mt-20">
+    </div>
+
+    <!-- NAVBAR (Ahora es estático, se queda arriba al bajar) -->
+    <nav class="flex justify-between items-center px-10 py-10 bg-transparent">
+        <div class="flex-1"></div>
+        <div class="flex items-center flex-col text-center">
+            <img th:src="@{/images/logo.png}" alt="Lumiere Logo" class="h-24 mb-3 drop-shadow-sm">
+            <p class="text-[10px] tracking-[0.4em] text-gray-400 uppercase font-light">Illuminate your beauty business</p>
+        </div>
+        <div class="flex-1 flex justify-end items-center space-x-6">
+            <a th:href="@{/login}" class="text-sm font-semibold text-gray-600 hover:text-purple-600 transition">Entrar</a>
+            <a th:href="@{/registro}" class="bg-[#6E3B9C] text-white px-8 py-2.5 rounded-full text-sm font-bold hover:bg-purple-800 transition shadow-md">Registrarse</a>
+        </div>
+    </nav>
+
+    <!-- MENU DE NAVEGACIÓN -->
+    <div class="flex justify-center space-x-12 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-purple-50">
+        <a th:href="@{/}" class="hover:text-purple-600 transition">Inicio</a>
+        <a th:href="@{/explorar}" class="hover:text-purple-600 transition">Buscar empresas</a>
+        <a th:href="@{/registro}" class="hover:text-purple-600 transition">Para emprendedores</a>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="relative z-20">
+        
+        <!-- HERO SECTION -->
+        <section class="px-6 py-24 text-center">
+            <div class="max-w-4xl mx-auto">
+                <span class="inline-flex items-center px-5 py-1.5 rounded-full border border-purple-100 text-[#6E3B9C] text-[10px] font-bold uppercase tracking-wider mb-8 bg-white shadow-sm">
+                    🌸 Red colaborativa de spas y manicuristas independientes
+                </span>
+                
+                <h1 class="text-7xl font-serif text-[#4A235A] mb-10 leading-[1.1]">
+                    Ilumina tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-400 italic">emprendimiento</span> de belleza.
+                </h1>
+                
+                <p class="text-gray-500 text-lg mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+                    Lumière Beauty Network conecta a quienes buscan una pausa con los spas y manicuristas que ofrecen experiencias únicas. Florece con nosotros.
+                </p>
+
+                <div class="flex justify-center space-x-6">
+                    <a th:href="@{/explorar}" class="bg-[#9b87f5] text-white px-10 py-5 rounded-full font-bold shadow-xl shadow-purple-100 hover:-translate-y-1 transition-all flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        Buscar empresas
+                    </a>
+                    <a th:href="@{/registro}" class="bg-white text-gray-700 border border-gray-100 px-10 py-5 rounded-full font-bold shadow-md hover:bg-gray-50 transition-all flex items-center">
+                        <svg class="w-5 h-5 mr-3 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                        Soy emprendedor
+                    </a>
+                </div>
+
+                <div class="mt-16 flex justify-center space-x-10 text-[10px] font-black text-gray-300 uppercase tracking-[0.2em]">
+                    <span class="flex items-center"><span class="text-pink-300 mr-2 text-lg">♥</span> +180 clientas felices</span>
+                    <span class="flex items-center"><span class="text-yellow-300 mr-2 text-lg">★</span> 4.8 promedio</span>
+                    <span class="flex items-center"><span class="text-purple-300 mr-2 text-lg">❀</span> Negocios verificados</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN NUESTRA ESENCIA -->
+        <section class="py-24 bg-white/40 backdrop-blur-[2px]">
+            <div class="max-w-7xl mx-auto px-10">
+                <div class="text-center mb-20">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1043/1043431.png" class="h-10 mx-auto mb-4 opacity-50">
+                    <h3 class="text-[11px] tracking-[0.6em] text-pink-500 uppercase font-black">Nuestra esencia</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-10">
+                    <!-- Card 1 -->
+                    <div class="p-12 rounded-[2.5rem] bg-gray-50/50 border border-white hover:bg-white hover:shadow-2xl transition-all duration-500 group">
+                        <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-600 mb-8 group-hover:scale-110 transition-transform">🔍</div>
+                        <h4 class="text-3xl font-serif text-[#4A235A] mb-5">Descubre</h4>
+                        <p class="text-gray-500 text-sm leading-relaxed font-light">Filtra por ciudad, servicio y precio. Compara spas y manicuristas con reseñas reales de la comunidad.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="p-12 rounded-[2.5rem] bg-white border border-purple-50 shadow-xl shadow-purple-50/40 hover:shadow-2xl transition-all duration-500 group">
+                        <div class="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center text-pink-600 mb-8 group-hover:scale-110 transition-transform">📅</div>
+                        <h4 class="text-3xl font-serif text-[#4A235A] mb-5">Agenda con calma</h4>
+                        <p class="text-gray-500 text-sm leading-relaxed font-light">Reserva tu cita directo desde el perfil del spa. Sin llamadas innecesarias, sin enredos, todo digital.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="p-12 rounded-[2.5rem] bg-gray-50/50 border border-white hover:bg-white hover:shadow-2xl transition-all duration-500 group">
+                        <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-600 mb-8 group-hover:scale-110 transition-transform">📈</div>
+                        <h4 class="text-3xl font-serif text-[#4A235A] mb-5">Crece tu negocio</h4>
+                        <p class="text-gray-500 text-sm leading-relaxed font-light">Panel administrativo con métricas de ingresos y estadísticas para entender el crecimiento de tu marca.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BANNER FINAL (CTA) -->
+        <section class="px-10 py-20">
+            <div class="bg-gradient-soft rounded-[3.5rem] p-24 text-center text-white shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-6xl font-serif mb-8 italic">¿Tienes un spa o haces uñas?</h2>
+                    <p class="text-white/90 mb-12 text-xl font-light max-w-xl mx-auto">Publica tu negocio gratis, recibe reservas automáticas y deja que tu talento brille en la red.</p>
+                    <a th:href="@{/registro}" class="bg-white text-purple-600 px-12 py-5 rounded-full font-black uppercase tracking-widest hover:scale-105 transition-transform inline-block shadow-lg">Publicar mi negocio</a>
+                </div>
+                <!-- Decoración fondo banner -->
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-24 text-center border-t border-purple-50">
+            <div class="flex items-center flex-col mb-12">
+                <img th:src="@{/images/logo.png}" class="h-12 mb-4 opacity-40 grayscale">
+                <h3 class="text-2xl font-serif text-[#4A235A] tracking-tight">Illuminate your beauty business</h3>
+                <p class="italic text-gray-400 mt-2 font-light">Inspirados en el lirio, iluminamos tu camino.</p>
+            </div>
+            <div class="flex justify-center space-x-8 mb-12 text-gray-400 font-bold text-[10px] tracking-widest uppercase">
+                <a href="#" class="hover:text-purple-600 transition">Instagram</a>
+                <a href="#" class="hover:text-purple-600 transition">Facebook</a>
+                <a href="#" class="hover:text-purple-600 transition">TikTok</a>
+            </div>
+            <p class="text-gray-300 text-[9px] uppercase tracking-[0.4em]">© 2026 Lumière Beauty Network · Hecho con cuidado en Pereira.</p>
+            <div class="mt-8 text-2xl">🍄</div>
+        </footer>
+
+    </main>
+
 </body>
 </html>
