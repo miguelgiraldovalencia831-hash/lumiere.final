@@ -7,5 +7,6 @@ import java.util.List;
 
 @Repository
 public interface CitaRepository extends JpaRepository<Cita, Long> {
+    // Busca las citas filtradas por el ID de la empresa
     List<Cita> findByEmpresaId(Long empresaId);
 }

@@ -1,40 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"><title>Lumiere - Agendar</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-50 min-h-screen flex items-center justify-center p-6">
+<head><meta charset="UTF-8"><script src="https://cdn.tailwindcss.com"></script></head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center font-sans">
     <div class="max-w-md w-full bg-white p-10 rounded-[3rem] shadow-2xl border border-white">
-        <h2 class="text-3xl font-black mb-6 text-pink-600 italic text-center">RESERVAR CITA</h2>
-        
+        <h2 class="text-3xl font-black mb-2 text-center italic text-pink-600">AGENDAR CITA</h2>
+        <p class="text-center text-slate-400 mb-8" th:text="'Servicio: ' + ${cita.servicio.nombre}"></p>
+
         <form th:action="@{/reservar/guardar}" th:object="${cita}" method="post" class="space-y-4">
             <input type="hidden" name="empresaId" th:value="${cita.empresa.id}">
             <input type="hidden" name="servicioId" th:value="${cita.servicio.id}">
 
-            <div class="space-y-1">
-                <label class="text-xs font-bold text-slate-400 ml-2">NOMBRE COMPLETO</label>
-                <input type="text" th:field="*{nombreCliente}" class="w-full bg-slate-50 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-pink-300" required>
-            </div>
+            <input type="text" th:field="*{nombreCliente}" placeholder="Tu nombre completo" class="w-full bg-slate-50 p-4 rounded-2xl outline-none" required>
+            <input type="tel" th:field="*{telefono}" placeholder="Tu teléfono" class="w-full bg-slate-50 p-4 rounded-2xl outline-none" required>
             
-            <div class="space-y-1">
-                <label class="text-xs font-bold text-slate-400 ml-2">TELÉFONO</label>
-                <input type="tel" th:field="*{telefono}" class="w-full bg-slate-50 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-pink-300" required>
-            </div>
-
             <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-400 ml-2">FECHA</label>
-                    <input type="date" th:field="*{fecha}" class="w-full bg-slate-50 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-pink-300" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-400 ml-2">HORA</label>
-                    <input type="time" th:field="*{hora}" class="w-full bg-slate-50 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-pink-300" required>
-                </div>
+                <input type="date" th:field="*{fecha}" class="w-full bg-slate-50 p-4 rounded-2xl outline-none" required>
+                <input type="time" th:field="*{hora}" class="w-full bg-slate-50 p-4 rounded-2xl outline-none" required>
             </div>
 
-            <button type="submit" class="w-full bg-pink-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-pink-100 hover:bg-pink-700 transition-all">Confirmar Reserva</button>
-            <a th:href="@{/explorar}" class="block text-center text-slate-400 text-sm mt-4">Cancelar</a>
+            <button type="submit" class="w-full bg-pink-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-pink-100">Confirmar Cita</button>
         </form>
     </div>
 </body>

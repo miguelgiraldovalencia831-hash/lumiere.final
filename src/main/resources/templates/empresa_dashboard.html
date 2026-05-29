@@ -1,0 +1,49 @@
+<main class="flex-1 ml-64 p-12">
+    <h1 class="text-5xl font-black mb-12" th:text="${empresa.nombre}"></h1>
+
+    <div class="grid grid-cols-3 gap-8 mb-12">
+        <div class="bg-white p-8 rounded-3xl shadow-sm border">
+            <h3 class="font-bold mb-6 italic">AÑADIR SERVICIO</h3>
+            <form th:action="@{/servicios/guardar}" method="post" class="space-y-4">
+                <input type="hidden" name="empresaId" th:value="${empresa.id}">
+                <input type="text" name="nombre" placeholder="Nombre servicio" class="w-full bg-slate-50 p-4 rounded-2xl outline-none" required>
+                <input type="number" name="precio" placeholder="Precio" class="w-full bg-slate-50 p-4 rounded-2xl outline-none" required>
+                <button class="w-full bg-pink-600 text-white py-4 rounded-2xl font-bold">Registrar</button>
+            </form>
+        </div>
+
+        <div class="col-span-2 bg-white p-8 rounded-3xl shadow-sm border">
+            <h3 class="font-bold mb-6">SERVICIOS ACTIVOS</h3>
+            <table class="w-full">
+                <tr th:each="s : ${servicios}" class="border-b">
+                    <td class="py-4 font-medium" th:text="${s.nombre}"></td>
+                    <td class="py-4 text-right font-bold text-pink-600" th:text="'$' + ${s.precio}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE CITAS RECIBIDAS -->
+    <div class="bg-white p-10 rounded-[3rem] shadow-xl border">
+        <h3 class="text-2xl font-black mb-8 italic">PRÓXIMAS CITAS</h3>
+        <table class="w-full text-left">
+            <thead>
+                <tr class="text-slate-400 text-xs uppercase border-b">
+                    <th class="pb-4">Cliente</th>
+                    <th class="pb-4">Servicio</th>
+                    <th class="pb-4">Fecha</th>
+                    <th class="pb-4">Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="c : ${citas}" class="border-b last:border-0">
+                    <td class="py-4 font-bold" th:text="${c.nombreCliente}"></td>
+                    <td class="py-4" th:text="${c.servicio.nombre}"></td>
+                    <td class="py-4" th:text="${c.fecha}"></td>
+                    <td class="py-4 text-pink-600 font-bold" th:text="${c.hora}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p th:if="${#lists.isEmpty(citas)}" class="text-center py-10 text-slate-400 italic">Aún no hay citas agendadas.</p>
+    </div>
+</main>
